@@ -1,133 +1,84 @@
-# AI-Medical-Chatbot
-Medical Chatbot using RAG: A LangChain and OpenAI-powered assistant using Pinecone for vector search and Flask for the web interface. Deployed on AWS via CI/CD.
+Markdown
+# AI-Medical-Chatbot 🩺
+**A Production-Ready Healthcare Assistant using RAG (Retrieval-Augmented Generation)**
 
-# Build-a-Complete-Medical-Chatbot-with-LLMs-LangChain-Pinecone-Flask-AWS
+This project is a sophisticated medical inquiry system developed as a Capstone Project for MS in Data Science. It utilizes a Retrieval-Augmented Generation (RAG) architecture to provide accurate, context-aware answers from a validated medical encyclopedia.
 
-# How to run?
-### STEPS:
+## 🚀 Features
+- **Intelligent Retrieval:** Uses Pinecone Vector DB to search through thousands of medical data chunks.
+- **LLM Integration:** Powered by Google Gemini 1.5 Flash for high-speed, cost-effective reasoning.
+- **Modern RAG Pipeline:** Built with LangChain for seamless orchestration between embeddings and the LLM.
+- **Web Interface:** A clean, responsive Flask-based UI for real-time user interaction.
+- **Cloud Native:** Architecture ready for AWS deployment via Docker and GitHub Actions.
 
-Clone the repository
+## 🛠️ Tech Stack
+- **Language:** Python 3.10
+- **Orchestration:** LangChain
+- **LLM:** Google Gemini 1.5 Flash
+- **Embeddings:** HuggingFace `all-MiniLM-L6-v2`
+- **Vector Store:** Pinecone
+- **Frontend:** Flask (HTML/CSS/JS)
 
+---
+
+## 🏃 How to Run
+
+### 1. Clone the Repository
 ```bash
-git clonehttps://github.com/entbappy/Build-a-Complete-Medical-Chatbot-with-LLMs-LangChain-Pinecone-Flask-AWS.git
-```
-### STEP 01- Create a conda environment after opening the repository
+git clone [https://github.com/Bhawana-Zende/AI-Medical-Chatbot.git](https://github.com/Bhawana-Zende/AI-Medical-Chatbot.git)
+cd AI-Medical-Chatbot
+2. Setup Environment
+Ensure you have Conda installed.
 
-```bash
+Bash
 conda create -n medibot python=3.10 -y
-```
-
-```bash
 conda activate medibot
-```
-
-
-### STEP 02- install the requirements
-```bash
 pip install -r requirements.txt
-```
+3. Configure Credentials
+Create a .env file in the root directory and add your API keys:
 
+Ini, TOML
+PINECONE_API_KEY = "your_pinecone_key"
+GOOGLE_API_KEY = "your_google_gemini_key"
+4. Run the Application
+Bash
+# Optional: Only run if you need to re-index the medical PDF
+# python store_index.py
 
-### Create a `.env` file in the root directory and add your Pinecone & openai credentials as follows:
-
-```ini
-PINECONE_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-OPENAI_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-```
-
-
-```bash
-# run the following command to store embeddings to pinecone
-python store_index.py
-```
-
-```bash
-# Finally run the following command
+# Launch the Flask Server
 python app.py
-```
+Open your browser and navigate to http://127.0.0.1:8080.
 
-Now,
-```bash
-open up localhost:
-```
+☁️ AWS CI/CD Deployment
+The repository includes a GitHub Actions workflow to automate deployment:
 
+Build: Dockerizes the Flask application.
 
-### Techstack Used:
+Push: Sends the image to Amazon ECR.
 
-- Python
-- LangChain
-- Flask
-- GPT
-- Pinecone
+Deploy: Pulls and runs the container on an Amazon EC2 instance.
 
+Required GitHub Secrets:
+AWS_ACCESS_KEY_ID
 
+AWS_SECRET_ACCESS_KEY
 
-# AWS-CICD-Deployment-with-Github-Actions
+AWS_DEFAULT_REGION
 
-## 1. Login to AWS console.
+ECR_REPO
 
-## 2. Create IAM user for deployment
+PINECONE_API_KEY
 
-	#with specific access
+GOOGLE_API_KEY
 
-	1. EC2 access : It is virtual machine
-
-	2. ECR: Elastic Container registry to save your docker image in aws
+Developed by Bhawana Zende 
 
 
-	#Description: About the deployment
-
-	1. Build docker image of the source code
-
-	2. Push your docker image to ECR
-
-	3. Launch Your EC2 
-
-	4. Pull Your image from ECR in EC2
-
-	5. Lauch your docker image in EC2
-
-	#Policy:
-
-	1. AmazonEC2ContainerRegistryFullAccess
-
-	2. AmazonEC2FullAccess
-
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/medicalbot
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-
-# 7. Setup github secrets:
-
-   - AWS_ACCESS_KEY_ID
-   - AWS_SECRET_ACCESS_KEY
-   - AWS_DEFAULT_REGION
-   - ECR_REPO
-   - PINECONE_API_KEY
-   - OPENAI_API_KEY
+### To update your GitHub now:
+1.  **Save** this into your `README.md` file in VS Code.
+2.  **Run** these commands in your terminal:
+    ```zsh
+    git add README.md
+    git commit -m "Finalized professional README documentation"
+    git push origin main
+    ```
