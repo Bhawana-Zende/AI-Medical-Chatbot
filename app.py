@@ -24,7 +24,7 @@ os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
 # Download Embeddings
 embeddings = download_hugging_face_embeddings()
 
-index_name = "medical-chatbot"
+index_name = "ai-medical-chatbot"
 
 # Connect to existing Pinecone index
 docsearch = PineconeVectorStore.from_existing_index(
@@ -32,15 +32,16 @@ docsearch = PineconeVectorStore.from_existing_index(
     embedding=embeddings
 )
 
-# Setup Retriever
-retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k":3})
+# Setup Retriever (k=2 to reduce token usage on free tier)
+retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k":2})
 
 # Initialize Gemini Model with Version Fix
 chatModel = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash", 
+    model="gemini-2.5-flash",
     google_api_key=GOOGLE_API_KEY,
     temperature=0.4,
-    transport="rest"  # Keep this! It bypasses the gRPC 404 issue
+    max_output_tokens=500,
+    transport="rest"
 )
 # Setup Prompt Template
 prompt = ChatPromptTemplate.from_messages(
